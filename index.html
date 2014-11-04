@@ -1,2 +1,29 @@
-<html onchange="localStorage.setItem('stuff',document.children[0].innerHTML)" onload="document.children[0].innerHTML=localStorage.getItem('stuff')" contenteditable>
+<!DOCTYPE HTML>
+<html id='notes' contenteditable=true>
+	<head>
+		<meta charset="utf-8" />
+		<title>Notes</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script charset="utf-8">
+			var editable;
+			function init() {
+				editable = document.getElementById("notes");
+				if (localStorage.getItem('notes')) {
+					editable.children[1].innerHTML = localStorage.getItem('notes');
+				}
+				if (editable.addEventListener) {
+					editable.addEventListener("input", save, false);
+					editable.addEventListener("DOMNodeInserted", save, false);
+					editable.addEventListener("DOMNodeRemoved", save, false);
+					editable.addEventListener("DOMCharacterDataModified", save, false);
+				}
+			}
+
+			function save(){
+				localStorage.setItem('notes', editable.children[1].innerHTML);
+			}
+		</script>
+	</head>
+	<body onload="init()">
+	</body>
 </html>
