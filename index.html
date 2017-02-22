@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html id='notes' contenteditable=true>
+<html contenteditable=true>
 	<head>
 		<meta charset="utf-8" />
 		<title>Notes</title>
@@ -9,7 +9,7 @@
 			function init() {
 				editable = document.getElementById("notes");
 				if (localStorage.getItem('notes')) {
-					editable.children[1].innerHTML = localStorage.getItem('notes');
+					editable.innerHTML = localStorage.getItem('notes');
 				}
 				if (editable.addEventListener) {
 					editable.addEventListener("input", save, false);
@@ -20,10 +20,10 @@
 			}
 
 			function save(){
-				localStorage.setItem('notes', editable.children[1].innerHTML);
+				localStorage.setItem('notes', editable.innerHTML);
 			}
 		</script>
 	</head>
-	<body onload="init()">
+	<body onload="init()" id="notes">
 	</body>
 </html>
